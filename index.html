@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>temaprikolovCloud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b0d10;
+    --bg-panel: #14171b;
+    --accent: #ff6a1a;
+    --accent-dim: #7a3413;
+    --text: #f0efe9;
+    --text-dim: #8d9198;
+    --line: #23272c;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+  }
+
+  main {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .wordmark {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 6vw, 2.6rem);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 0 0 4px;
+  }
+
+  .wordmark span { color: var(--accent); }
+
+  .tagline {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin: 0 0 40px;
+  }
+
+  .waveform {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 64px;
+    margin-bottom: 44px;
+  }
+
+  .waveform .bar {
+    width: 4px;
+    border-radius: 2px;
+    background: var(--accent);
+    opacity: 0.85;
+    animation: pulse 1.8s ease-in-out infinite;
+    transform-origin: bottom;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scaleY(0.25); }
+    50% { transform: scaleY(1); }
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 17px 20px;
+    border-radius: 12px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .btn:active { transform: scale(0.98); }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #140900;
+  }
+
+  .btn-primary:hover { background: #ff7c37; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--line);
+  }
+
+  .btn-secondary:hover { border-color: var(--text-dim); }
+
+  .btn svg { flex-shrink: 0; }
+
+  footer {
+    margin-top: 32px;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="waveform" id="waveform" aria-hidden="true"></div>
+
+  <h1 class="wordmark">temaprikolov<span>Cloud</span></h1>
+  <p class="tagline">Расширение для SoundCloud</p>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="./temaprikolovCloud.rar" download>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m6 12 6 6 6-6"/><path d="M5 21h14"/></svg>
+      Скачать
+    </a>
+    <a class="btn btn-secondary" href="https://t.me/temaprikolovv" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.05 3.35 2.98 10.4c-1.23.5-1.22 1.2-.22 1.5l4.62 1.44 1.78 5.4c.22.6.4.85.83.85.42 0 .6-.2.83-.5l2-2.3 4.68 3.4c.87.5 1.48.24 1.7-.8l3.08-14.5c.32-1.3-.5-1.9-1.23-1.54Z"/></svg>
+      Telegram
+    </a>
+  </div>
+
+  <footer>t.me/temaprikolovv</footer>
+</main>
+
+<script>
+  const wf = document.getElementById('waveform');
+  const heights = [18, 34, 52, 40, 64, 30, 46, 58, 26, 44, 20, 38];
+  heights.forEach((h, i) => {
+    const bar = document.createElement('div');
+    bar.className = 'bar';
+    bar.style.height = h + 'px';
+    bar.style.animationDelay = (i * 0.08) + 's';
+    wf.appendChild(bar);
+  });
+
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (mq.matches) {
+    document.querySelectorAll('.bar').forEach(b => b.style.animation = 'none');
+  }
+</script>
+</body>
+</html>
